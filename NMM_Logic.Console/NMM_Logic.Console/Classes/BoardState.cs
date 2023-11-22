@@ -21,12 +21,12 @@ internal class BoardState(BoardSolver solver)
 
     private bool _removalPhaseTriggered;
 
-    public void MoveTile(BoardPosition destination, BoardPosition? sourceTile)
+    public void MoveTile(BoardPosition destination, BoardPosition? sourceTile = null)
     {
         if (!solver.IsValidMove(PlayerPositions, destination, sourceTile))
             return; // TODO: Maybe have some feedback lol ... this is shite like this
 
-        PlayerPositions[CurrentPlayer] &= destination;
+        PlayerPositions[CurrentPlayer] |= destination;
 
         if (solver.HasTriggeredRemovalPhase(PlayerPositions[CurrentPlayer], destination))
         {
