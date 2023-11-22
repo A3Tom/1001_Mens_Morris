@@ -1,41 +1,70 @@
-﻿namespace NMM_Logic.Console.Classes;
+﻿using NMM_Logic.Console.Extensions;
+using NMM_Logic.Console.Solvers;
 
-// This is mad verbose, I needed to get this down first so I could visualise flags properly
-internal class BoardState
+namespace NMM_Logic.Console.Classes;
+
+internal class BoardState(BoardSolver solver)
 {
-    public byte[][] Board = GenerateFreshBoard();
+    public static Guid BoardId => Guid.NewGuid();
 
-    public byte[] UpperTopRow => Board[0];
-    public byte[] UpperMidRow => Board[1];
-    public byte[] UpperBottomRow => Board[2];
+    public IDictionary<Player, BoardPosition> PlayerPositions { get; private set; } = 
+        new Dictionary<Player, BoardPosition>()
+    {
+        { Player.White, BoardPosition.None },
+        { Player.Black, BoardPosition.None }
+    };
+    public GamePhase GamePhase => CalculateCurrentGamePhase();
 
-    public byte[] MidLeftRow => Board[3];
-    public byte[] MidRightRow => Board[4];
+    public int TurnCount { get; private set; } = 0;
+    public Player CurrentPlayer => TurnCount % 2 == 0 ? Player.White : Player.Black;
+    private Player _awaitingPlayer => CurrentPlayer != Player.White ? Player.White : Player.Black;
 
-    public byte[] LowerTopRow => Board[5];
-    public byte[] LowerMidRow => Board[6];
-    public byte[] LowerBottomRow => Board[7];
+    private bool _removalPhaseTriggered;
 
-    public byte[] LeftFarColumn => [UpperTopRow[0], MidLeftRow[0], LowerBottomRow[0]];
-    public byte[] LeftMidColumn => [UpperMidRow[0], MidLeftRow[1], LowerMidRow[0]];
-    public byte[] LeftNearColumn => [UpperBottomRow[0], MidLeftRow[2], LowerTopRow[0]];
+    public void MoveTile(BoardPosition destination, BoardPosition? sourceTile)
+    {
+        if (!solver.IsValidMove(PlayerPositions, destination, sourceTile))
+            return; // TODO: Maybe have some feedback lol ... this is shite like this
 
-    public byte[] UpperMidColumn => [UpperTopRow[1], UpperMidRow[1], UpperBottomRow[1]];
-    public byte[] LowerMidColumn => [LowerTopRow[1], LowerMidRow[1], LowerBottomRow[1]];
+        PlayerPositions[CurrentPlayer] &= destination;
 
-    public byte[] RightFarColumn => [UpperTopRow[2], MidRightRow[2], LowerBottomRow[2]];
-    public byte[] RightMidColumn => [UpperMidRow[2], MidRightRow[1], LowerMidRow[2]];
-    public byte[] RightNearColumn => [UpperBottomRow[2], MidRightRow[2], LowerTopRow[2]];
+        if (solver.HasTriggeredRemovalPhase(PlayerPositions[CurrentPlayer], destination))
+        {
+            _removalPhaseTriggered = true;
+            return;
+        }
 
-    private static byte[][] GenerateFreshBoard() =>
-    [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ];
+        TurnCount++;
+    }
+
+    public void RemoveTile(BoardPosition chosenTile)
+    {
+        if (!solver.IsValidRemoval(PlayerPositions[_awaitingPlayer], chosenTile))
+            return;
+
+        PlayerPositions[_awaitingPlayer] ^= chosenTile;
+
+        _removalPhaseTriggered = false;
+        TurnCount++;
+    }
+
+    private GamePhase CalculateCurrentGamePhase()
+    {
+        if (_removalPhaseTriggered)
+            return GamePhase.Removal;
+
+        if (TurnCount <= 18)
+            return GamePhase.Placement;
+
+        var whiteTilesRemaning = ((int)PlayerPositions[Player.White]).GetSetFlagCount();
+        var blackTilesRemaining = ((int)PlayerPositions[Player.Black]).GetSetFlagCount();
+
+        if (whiteTilesRemaning == 3 || blackTilesRemaining == 3)
+            return GamePhase.EndGame;
+
+        if (whiteTilesRemaning < 3 || blackTilesRemaining < 3)
+            return GamePhase.Concluded;
+
+        return GamePhase.Movement;
+    }
 }
