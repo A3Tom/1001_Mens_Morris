@@ -13,6 +13,9 @@ using NMM_Logic.Console.Solvers;
 
 var solver = new MovingTileSolver();
 
+var boardState = new BoardState(solver);
+
+
 var currentPositions = 
     BoardPosition.Upper_Top_Left | 
     BoardPosition.Upper_Top_Middle | 
