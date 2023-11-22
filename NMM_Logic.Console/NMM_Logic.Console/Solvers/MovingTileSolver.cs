@@ -1,20 +1,21 @@
 ﻿using NMM_Logic.Console.Classes;
+using NMM_Logic.Console.Extensions;
 
 namespace NMM_Logic.Console.Solvers;
 internal class MovingTileSolver : BoardSolver
 {
-    internal override bool HasTriggeredRemovalPhase(BoardPosition currentPositions, BoardPosition destination) =>
+    internal override bool HasTriggeredRemovalPhase(BoardPosition playerCurrentPositions, BoardPosition destination) =>
         PossibleCombinations
             .Where(combinations => combinations.HasFlag(destination))
-            .Select(matches => matches & (currentPositions | destination))
-            .Any(matches => GetSetFlagCount((int)matches) == 3);
+            .Select(matches => matches & (playerCurrentPositions | destination))
+            .Any(matches => ((int)matches).GetSetFlagCount() == 3);
 
-    internal override bool IsValidMove(BoardState boardState, BoardPosition destination)
+    internal override bool IsValidMove(IDictionary<Player, BoardPosition> playerPositions, BoardPosition destination, BoardPosition? sourceTile)
     {
         throw new NotImplementedException();
     }
 
-    internal override bool MoveTile(BoardState board, BoardPosition source, BoardPosition destination)
+    internal override bool IsValidRemoval(BoardPosition opponentCurrentPositions, BoardPosition chosenTile)
     {
         throw new NotImplementedException();
     }
@@ -43,19 +44,4 @@ internal class MovingTileSolver : BoardSolver
             BoardPosition.Upper_Top_Middle | BoardPosition.Upper_Mid_Middle | BoardPosition.Upper_Bottom_Middle,
             BoardPosition.Lower_Top_Middle | BoardPosition.Lower_Mid_Middle | BoardPosition.Lower_Bottom_Middle
         ];
-
-    // Full Credit to this answer: https://stackoverflow.com/a/1333011
-    // What an absolute fucking beast of a solve. Nice one mate, cheers
-    private static int GetSetFlagCount(int lValue)
-    {
-        int iCount = 0;
-
-        while (lValue != 0)
-        {
-            lValue &= (lValue - 1);
-            iCount++;
-        }
-
-        return iCount;
-    }
 }
