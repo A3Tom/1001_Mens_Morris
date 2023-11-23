@@ -22,9 +22,15 @@ internal static class AsciiBoardDisplayer
 {
     public static void OutputToCLI(BoardState boardState)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
         OutputUpperTopLine(boardState.PlayerPositions);
         OutputUpperMidLine(boardState.PlayerPositions);
         OutputUpperBottomLine(boardState.PlayerPositions);
+        OutputMiddleLine(boardState.PlayerPositions);
+        OutputLowerTopLine(boardState.PlayerPositions);
+        OutputLowerMidLine(boardState.PlayerPositions);
+        OutputLowerBottomLine(boardState.PlayerPositions);
     }
 
     private static void OutputUpperTopLine(IDictionary<Player, BoardPosition> positions)
@@ -43,7 +49,7 @@ internal static class AsciiBoardDisplayer
         OutputNumber(BoardPosition.Upper_Mid_Left, positions);
         Console.Write("  -------- ");
         OutputNumber(BoardPosition.Upper_Mid_Middle, positions);
-        Console.Write("  --------- ");
+        Console.Write(" ---------  ");
         OutputNumber(BoardPosition.Upper_Mid_Right, positions);
         Console.Write("    |");
         Console.WriteLine("\n|    |           |            |    |");
@@ -61,42 +67,100 @@ internal static class AsciiBoardDisplayer
         Console.WriteLine("\n|    |    |             |     |    |");
     }
 
+    private static void OutputMiddleLine(IDictionary<Player, BoardPosition> positions)
+    {
+        OutputNumber(BoardPosition.Left_Mid_Far, positions);
+        Console.Write("-- ");
+        OutputNumber(BoardPosition.Left_Mid_Middle, positions);
+        Console.Write("-- ");
+        OutputNumber(BoardPosition.Left_Mid_Center, positions);
+        Console.Write("            ");
+        OutputNumber(BoardPosition.Right_Mid_Center, positions);
+        Console.Write("-- ");
+        OutputNumber(BoardPosition.Right_Mid_Middle, positions);
+        Console.Write("-- ");
+        OutputNumber(BoardPosition.Right_Mid_Far, positions);
+        Console.WriteLine("\n|    |    |             |     |    |");
+    }
+
+    private static void OutputLowerTopLine(IDictionary<Player, BoardPosition> positions)
+    {
+        Console.Write("|    |    ");
+        OutputNumber(BoardPosition.Lower_Top_Left, positions);
+        Console.Write(" --- ");
+        OutputNumber(BoardPosition.Lower_Top_Middle, positions);
+        Console.Write(" --- ");
+        OutputNumber(BoardPosition.Lower_Top_Right, positions);
+        Console.Write("    |    |");
+        Console.WriteLine("\n|    |           |            |    |");
+    }
+
+    private static void OutputLowerMidLine(IDictionary<Player, BoardPosition> positions)
+    {
+        Console.Write("|    ");
+        OutputNumber(BoardPosition.Lower_Mid_Left, positions);
+        Console.Write(" -------- ");
+        OutputNumber(BoardPosition.Lower_Mid_Middle, positions);
+        Console.Write(" -------- ");
+        OutputNumber(BoardPosition.Lower_Mid_Right, positions);
+        Console.Write("    |");
+        Console.WriteLine("\n|                |                 |");
+    }
+
+    private static void OutputLowerBottomLine(IDictionary<Player, BoardPosition> positions)
+    {
+        OutputNumber(BoardPosition.Lower_Bottom_Left, positions);
+        Console.Write(" ------------- ");
+        OutputNumber(BoardPosition.Lower_Bottom_Middle, positions);
+        Console.Write(" -------------- ");
+        OutputNumber(BoardPosition.Lower_Bottom_Right, positions);
+        Console.Write("\n");
+    }
+
     private static void OutputNumber(BoardPosition boardPosition, IDictionary<Player, BoardPosition> positions)
     {
-        var outputString = GetOutputNumberFromBoardPosition(boardPosition);
         var playerAtPosition = GetPlayerAtPosition(boardPosition, positions);
+        var outputString = BuildOutputSymbol(boardPosition, playerAtPosition);
 
         _ = ToggleRelevantColourScheme(playerAtPosition);
         Console.Write(outputString);
-        _ = ToggleWhiteOnBlack();
+        _ = ToggleWhitePlayerColours();
     }
 
     private static bool ToggleRelevantColourScheme(Player? playerAtPosition) => 
         playerAtPosition switch
         {
-            Player.White => ToggleWhiteOnBlack(),
-            Player.Black => ToggleBlackOnWhite(),
-            _ => ToggleBlueOnBlack()
+            Player.White => ToggleWhitePlayerColours(),
+            Player.Black => ToggleBlackPlayerColours(),
+            _ => ToggleUnoccupiedColours()
         };
 
-    private static bool ToggleWhiteOnBlack()
+    private static bool ToggleWhitePlayerColours()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.BackgroundColor = ConsoleColor.Black;
         return true;
     }
-    private static bool ToggleBlackOnWhite()
+    private static bool ToggleBlackPlayerColours()
     {
         Console.ForegroundColor = ConsoleColor.Black;
         Console.BackgroundColor = ConsoleColor.White;
         return true;
     }
-    private static bool ToggleBlueOnBlack()
+    private static bool ToggleUnoccupiedColours()
     {
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.BackgroundColor = ConsoleColor.Black;
         return true;
     }
+
+    private static string BuildOutputSymbol(BoardPosition boardPosition, Player? player) =>
+        player switch
+        {
+            Player.White => "●",
+            Player.Black => "●",
+            _ => GetOutputNumberFromBoardPosition(boardPosition)
+        };
 
     // Look... I know this excessive, inefficient and generally stupid but I am on a binary vibe the now
     private static string GetOutputNumberFromBoardPosition(BoardPosition boardPosition) =>
