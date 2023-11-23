@@ -66,16 +66,18 @@ internal static class AsciiBoardDisplayer
         var outputString = GetOutputNumberFromBoardPosition(boardPosition);
         var playerAtPosition = GetPlayerAtPosition(boardPosition, positions);
 
-        _ = playerAtPosition switch
+        _ = ToggleRelevantColourScheme(playerAtPosition);
+        Console.Write(outputString);
+        _ = ToggleWhiteOnBlack();
+    }
+
+    private static bool ToggleRelevantColourScheme(Player? playerAtPosition) => 
+        playerAtPosition switch
         {
             Player.White => ToggleWhiteOnBlack(),
             Player.Black => ToggleBlackOnWhite(),
             _ => ToggleBlueOnBlack()
         };
-            
-        Console.Write(outputString);
-        ToggleWhiteOnBlack();
-    }
 
     private static bool ToggleWhiteOnBlack()
     {
