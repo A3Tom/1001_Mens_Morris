@@ -1,13 +1,13 @@
-﻿using NMM_Logic.Console.Extensions;
-using NMM_Logic.Console.Solvers;
+﻿using NMM_Logic.CLI.Extensions;
+using NMM_Logic.CLI.Solvers;
 
-namespace NMM_Logic.Console.Classes;
+namespace NMM_Logic.CLI.Classes;
 
 internal class BoardState(BoardSolver solver)
 {
     public static Guid BoardId => Guid.NewGuid();
 
-    public IDictionary<Player, BoardPosition> PlayerPositions { get; private set; } = 
+    public IDictionary<Player, BoardPosition> PlayerPositions { get; private set; } =
         new Dictionary<Player, BoardPosition>()
     {
         { Player.White, BoardPosition.None },
@@ -17,7 +17,7 @@ internal class BoardState(BoardSolver solver)
 
     public int TurnCount { get; private set; } = 0;
     public Player CurrentPlayer => TurnCount % 2 == 0 ? Player.White : Player.Black;
-    private Player _awaitingPlayer => CurrentPlayer != Player.White ? Player.White : Player.Black;
+    public Player AwaitingPlayer => CurrentPlayer != Player.White ? Player.White : Player.Black;
 
     private bool _removalPhaseTriggered;
 
@@ -39,10 +39,10 @@ internal class BoardState(BoardSolver solver)
 
     public void RemoveTile(BoardPosition chosenTile)
     {
-        if (!solver.IsValidRemoval(PlayerPositions[_awaitingPlayer], chosenTile))
+        if (!solver.IsValidRemoval(PlayerPositions[AwaitingPlayer], chosenTile))
             return;
 
-        PlayerPositions[_awaitingPlayer] ^= chosenTile;
+        PlayerPositions[AwaitingPlayer] ^= chosenTile;
 
         _removalPhaseTriggered = false;
         TurnCount++;

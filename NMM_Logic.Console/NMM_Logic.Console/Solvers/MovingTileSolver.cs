@@ -1,7 +1,7 @@
-﻿using NMM_Logic.Console.Classes;
-using NMM_Logic.Console.Extensions;
+﻿using NMM_Logic.CLI.Classes;
+using NMM_Logic.CLI.Extensions;
 
-namespace NMM_Logic.Console.Solvers;
+namespace NMM_Logic.CLI.Solvers;
 internal class MovingTileSolver : BoardSolver
 {
     internal override bool HasTriggeredRemovalPhase(BoardPosition playerCurrentPositions, BoardPosition destination) =>
@@ -12,7 +12,7 @@ internal class MovingTileSolver : BoardSolver
 
     internal override bool IsValidMove(IDictionary<Player, BoardPosition> playerPositions, BoardPosition destination, BoardPosition? sourceTile)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
     internal override bool IsValidRemoval(BoardPosition opponentCurrentPositions, BoardPosition chosenTile)

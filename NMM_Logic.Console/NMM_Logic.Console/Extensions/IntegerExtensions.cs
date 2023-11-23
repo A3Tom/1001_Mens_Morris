@@ -1,4 +1,4 @@
-﻿namespace NMM_Logic.Console.Extensions;
+﻿namespace NMM_Logic.CLI.Extensions;
 internal static class IntegerExtensions
 {
     // Full Credit to this answer: https://stackoverflow.com/a/1333011

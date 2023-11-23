@@ -1,4 +1,4 @@
-﻿namespace NMM_Logic.Console.Classes;
+﻿namespace NMM_Logic.CLI.Classes;
 
 [Flags]
 internal enum BoardPosition
