@@ -22,6 +22,7 @@ internal static class AsciiBoardDisplayer
 {
     public static void OutputToCLI(BoardState boardState)
     {
+        Console.Clear();
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         OutputUpperTopLine(boardState.PlayerPositions);
