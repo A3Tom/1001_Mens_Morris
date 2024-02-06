@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dism3s853fh6b"]
+
+[ext_resource type="Script" path="res://scripts/Tile.cs" id="1_v7io1"]
+[ext_resource type="Texture2D" uid="uid://befx8sja81o5g" path="res://assets/micro_assets_spritesheet.png" id="1_vywat"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkxd8"]
+atlas = ExtResource("1_vywat")
+region = Rect2(72, 48, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfc05"]
+atlas = ExtResource("1_vywat")
+region = Rect2(0, 224, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkc1k"]
+atlas = ExtResource("1_vywat")
+region = Rect2(8, 224, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggfjg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkxd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfc05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkc1k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r3dvn"]
+radius = 17.2966
+
+[node name="tile" type="Node2D"]
+script = ExtResource("1_v7io1")
+
+[node name="tile" type="Sprite2D" parent="."]
+
+[node name="tile_sprite" type="AnimatedSprite2D" parent="tile"]
+position = Vector2(20, 20)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ggfjg")
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="tile"]
+position = Vector2(561, 132)
+scale = Vector2(2.2, 2.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tile/Area2D"]
+position = Vector2(-245.909, -50.9091)
+shape = SubResource("CircleShape2D_r3dvn")
+
+[connection signal="mouse_entered" from="tile/Area2D" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="tile/Area2D" to="." method="OnMouseExit"]

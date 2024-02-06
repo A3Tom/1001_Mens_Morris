@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://i36dp2ohn5ei"]
+
+[ext_resource type="Script" path="res://scripts/board.cs" id="1_5piiq"]
+[ext_resource type="Texture2D" uid="uid://c8xuweidxdip4" path="res://assets/board.png" id="2_uiuxw"]
+[ext_resource type="PackedScene" uid="uid://dism3s853fh6b" path="res://scenes/tile.tscn" id="3_tousl"]
+
+[node name="board" type="Node2D"]
+script = ExtResource("1_5piiq")
+
+[node name="boardBG" type="Sprite2D" parent="."]
+position = Vector2(269, 270)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_uiuxw")
+
+[node name="tiles" type="Node2D" parent="."]
+
+[node name="tile_1" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(-20, -18)
+
+[node name="tile_2" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, -18)
+
+[node name="tile_3" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(519, -18)
+
+[node name="tile_4" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(71, 73)
+
+[node name="tile_5" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, 73)
+
+[node name="tile_6" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(429, 73)
+
+[node name="tile_7" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(161, 162)
+
+[node name="tile_8" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, 162)
+
+[node name="tile_9" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(340, 162)
+
+[node name="tile_10" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(-20, 251)
+
+[node name="tile_11" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(71, 251)
+
+[node name="tile_12" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(161, 251)
+
+[node name="tile_13" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(340, 251)
+
+[node name="tile_14" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(430, 251)
+
+[node name="tile_15" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(519, 251)
+
+[node name="tile_16" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(161, 341)
+
+[node name="tile_17" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, 341)
+
+[node name="tile_18" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(340, 341)
+
+[node name="tile_19" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(71, 430)
+
+[node name="tile_20" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, 430)
+
+[node name="tile_21" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(429, 430)
+
+[node name="tile_22" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(-20, 519)
+
+[node name="tile_23" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(250, 519)
+
+[node name="tile_24" parent="tiles" instance=ExtResource("3_tousl")]
+position = Vector2(519, 519)

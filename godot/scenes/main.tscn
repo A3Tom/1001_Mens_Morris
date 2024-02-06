@@ -1,0 +1,245 @@
+[gd_scene load_steps=6 format=3 uid="uid://lqxpmfxfyub5"]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_3odjt"]
+[ext_resource type="Script" path="res://scripts/board.cs" id="2_n3cgk"]
+[ext_resource type="PackedScene" uid="uid://dism3s853fh6b" path="res://scenes/tile.tscn" id="2_purwc"]
+[ext_resource type="Texture2D" uid="uid://c8xuweidxdip4" path="res://assets/board.png" id="2_ts3s8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_43ibi"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_3odjt")
+
+[node name="board" type="Node2D" parent="."]
+position = Vector2(523, 56)
+script = ExtResource("2_n3cgk")
+
+[node name="boardBG" type="Sprite2D" parent="board"]
+position = Vector2(269, 270)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_ts3s8")
+
+[node name="tiles" type="Node2D" parent="board"]
+
+[node name="tile_1" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(-20, -18)
+TileId = 1
+
+[node name="tile_2" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, -18)
+TileId = 2
+
+[node name="tile_3" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(519, -18)
+TileId = 3
+
+[node name="tile_4" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(71, 73)
+TileId = 4
+
+[node name="tile_5" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, 73)
+TileId = 5
+
+[node name="tile_6" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(429, 73)
+TileId = 6
+
+[node name="tile_7" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(161, 162)
+TileId = 7
+
+[node name="tile_8" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, 162)
+TileId = 8
+
+[node name="tile_9" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(340, 162)
+TileId = 9
+
+[node name="tile_10" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(-20, 251)
+TileId = 10
+
+[node name="tile_11" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(71, 251)
+TileId = 11
+
+[node name="tile_12" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(161, 251)
+TileId = 12
+
+[node name="tile_13" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(340, 251)
+TileId = 13
+
+[node name="tile_14" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(430, 251)
+TileId = 14
+
+[node name="tile_15" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(519, 251)
+TileId = 15
+
+[node name="tile_16" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(161, 341)
+TileId = 16
+
+[node name="tile_17" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, 341)
+TileId = 17
+
+[node name="tile_18" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(340, 341)
+TileId = 18
+
+[node name="tile_19" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(71, 430)
+TileId = 19
+
+[node name="tile_20" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, 430)
+TileId = 20
+
+[node name="tile_21" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(429, 430)
+TileId = 21
+
+[node name="tile_22" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(-20, 519)
+TileId = 22
+
+[node name="tile_23" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(250, 519)
+TileId = 23
+
+[node name="tile_24" parent="board/tiles" instance=ExtResource("2_purwc")]
+position = Vector2(519, 519)
+TileId = 24
+
+[node name="gamestate_panel" type="Node2D" parent="."]
+
+[node name="board_status" type="Node2D" parent="gamestate_panel"]
+position = Vector2(0, -20)
+
+[node name="hdr_boardstatus" type="Label" parent="gamestate_panel/board_status"]
+offset_left = 10.0
+offset_top = 159.0
+offset_right = 131.0
+offset_bottom = 185.0
+text = "Board id:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_boardstatus" type="Label" parent="gamestate_panel/board_status"]
+offset_left = 133.0
+offset_top = 159.0
+offset_right = 436.0
+offset_bottom = 185.0
+text = "123-435-678-kfa"
+label_settings = SubResource("LabelSettings_43ibi")
+metadata/_edit_use_anchors_ = true
+
+[node name="currentplayer" type="Node2D" parent="gamestate_panel"]
+
+[node name="hdr_currentplayer" type="Label" parent="gamestate_panel/currentplayer"]
+offset_left = 10.0
+offset_top = 165.0
+offset_right = 131.0
+offset_bottom = 191.0
+text = "Current Player: "
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_currentplayer" type="Label" parent="gamestate_panel/currentplayer"]
+offset_left = 133.0
+offset_top = 165.0
+offset_right = 436.0
+offset_bottom = 191.0
+text = "Remoooooooo"
+label_settings = SubResource("LabelSettings_43ibi")
+metadata/_edit_use_anchors_ = true
+
+[node name="turn_count" type="Node2D" parent="gamestate_panel"]
+position = Vector2(0, 51)
+
+[node name="hdr_turncount" type="Label" parent="gamestate_panel/turn_count"]
+offset_left = 10.0
+offset_top = 139.0
+offset_right = 131.0
+offset_bottom = 165.0
+text = "Turn Count:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_turncount" type="Label" parent="gamestate_panel/turn_count"]
+offset_left = 133.0
+offset_top = 139.0
+offset_right = 436.0
+offset_bottom = 165.0
+text = "14123"
+label_settings = SubResource("LabelSettings_43ibi")
+metadata/_edit_use_anchors_ = true
+
+[node name="game_phase" type="Node2D" parent="gamestate_panel"]
+position = Vector2(0, 51)
+
+[node name="hdr_gamephase" type="Label" parent="gamestate_panel/game_phase"]
+offset_left = 10.0
+offset_top = 165.0
+offset_right = 131.0
+offset_bottom = 191.0
+text = "Game Phase:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_gamephase" type="Label" parent="gamestate_panel/game_phase"]
+offset_left = 133.0
+offset_top = 165.0
+offset_right = 436.0
+offset_bottom = 191.0
+text = "The pope is a legend"
+label_settings = SubResource("LabelSettings_43ibi")
+metadata/_edit_use_anchors_ = true
+
+[node name="current_tile" type="Node2D" parent="gamestate_panel"]
+position = Vector2(0, 53)
+
+[node name="hdr_currenttile" type="Label" parent="gamestate_panel/current_tile"]
+offset_left = 10.0
+offset_top = 238.0
+offset_right = 131.0
+offset_bottom = 264.0
+text = "Selected tile:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_currenttile" type="Label" parent="gamestate_panel/current_tile"]
+offset_left = 133.0
+offset_top = 238.0
+offset_right = 436.0
+offset_bottom = 264.0
+text = "tile 69345943"
+label_settings = SubResource("LabelSettings_43ibi")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="PlayerChanged" from="." to="board" method="UpdateTilesForCurrentPlayer"]
+[connection signal="TileSelected" from="board/tiles/tile_1" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_2" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_3" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_4" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_5" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_6" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_7" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_8" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_9" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_10" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_11" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_12" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_13" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_14" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_15" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_16" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_17" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_18" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_19" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_20" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_21" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_22" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_23" to="." method="OnTileSelected"]
+[connection signal="TileSelected" from="board/tiles/tile_24" to="." method="OnTileSelected"]
