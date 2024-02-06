@@ -1,7 +1,7 @@
 ﻿namespace NMM_Logic.CLI.Classes;
 
 [Flags]
-internal enum BoardPosition
+public enum BoardPosition
 {
     None = 0,
 

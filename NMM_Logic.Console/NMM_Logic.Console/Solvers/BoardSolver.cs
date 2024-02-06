@@ -1,7 +1,7 @@
 ﻿using NMM_Logic.CLI.Classes;
 
 namespace NMM_Logic.CLI.Solvers;
-internal abstract class BoardSolver
+public abstract class BoardSolver
 {
     internal abstract bool IsValidMove(IDictionary<Player, BoardPosition> playerPositions, BoardPosition destination, BoardPosition? sourceTile);
     internal abstract bool HasTriggeredRemovalPhase(BoardPosition playerCurrentPositions, BoardPosition destination);

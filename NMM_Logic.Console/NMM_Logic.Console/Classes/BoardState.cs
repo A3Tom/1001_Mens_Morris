@@ -3,7 +3,7 @@ using NMM_Logic.CLI.Solvers;
 
 namespace NMM_Logic.CLI.Classes;
 
-internal class BoardState(BoardSolver solver)
+public class BoardState(BoardSolver solver)
 {
     public static Guid BoardId => Guid.NewGuid();
 

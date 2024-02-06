@@ -1,5 +1,5 @@
 ﻿namespace NMM_Logic.CLI.Classes;
-internal enum GamePhase
+public enum GamePhase
 {
     Placement = 1,
     Movement = 2,

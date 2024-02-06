@@ -2,7 +2,7 @@
 using NMM_Logic.CLI.Extensions;
 
 namespace NMM_Logic.CLI.Solvers;
-internal class MovingTileSolver : BoardSolver
+public class MovingTileSolver : BoardSolver
 {
     internal override bool HasTriggeredRemovalPhase(BoardPosition playerCurrentPositions, BoardPosition destination) =>
         PossibleCombinations
