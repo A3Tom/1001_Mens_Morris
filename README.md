@@ -31,7 +31,7 @@ The last time I was involved in games development was over a decade ago building
 - [ ] Deployment to wherever else folk deploy games that naebdy will ever play
 
 ### Screenshot
-![GodotScreenshot](resources\godot_board.jpg)
+![GodotScreenshot](resources/godot_board.jpg)
 
 ## C# CLI
 
@@ -59,7 +59,7 @@ A C# dotnet 8 game engine for Nine Men's Morris using bitwise operations and fla
 - [ ] Deployment to Github Releases
 
 ### Screenshot
-![CSharpCliScreenshot](resources\cli_board.jpg)
+![CSharpCliScreenshot](resources/cli_board.jpg)
 
 ## Bonus Points: Main Server
 
