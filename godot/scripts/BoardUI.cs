@@ -1,7 +1,7 @@
 using Godot;
 using System.Linq;
 
-public partial class board : Node2D
+public partial class BoardUI : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,7 +16,7 @@ public partial class board : Node2D
 
 	private void UpdateTilesForCurrentPlayer(long player)
 	{
-		var tiles = GetNode<Godot.Node2D>("tiles")
+		var tiles = GetNode<Node2D>("tiles")
 			.GetChildren()
 			.Select(tileNode => (Tile)tileNode);
 
@@ -26,7 +26,7 @@ public partial class board : Node2D
 
 	private void ResetBoard()
 	{
-		var tiles = GetNode<Godot.Node2D>("tiles").GetChildren();
+		var tiles = GetNode<Node2D>("tiles").GetChildren();
 
 		foreach (var tile in tiles)
 			tile.GetNode<AnimatedSprite2D>("tile/tile_sprite").Frame = 0;
