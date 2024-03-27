@@ -1,18 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://lqxpmfxfyub5"]
+[gd_scene load_steps=5 format=3 uid="uid://lqxpmfxfyub5"]
 
-[ext_resource type="Script" path="res://scripts/Main.cs" id="1_3odjt"]
-[ext_resource type="Script" path="res://scripts/board.cs" id="2_n3cgk"]
+[ext_resource type="Script" path="res://scripts/GameManager.cs" id="2_7evqg"]
 [ext_resource type="PackedScene" uid="uid://dism3s853fh6b" path="res://scenes/tile.tscn" id="2_purwc"]
 [ext_resource type="Texture2D" uid="uid://c8xuweidxdip4" path="res://assets/board.png" id="2_ts3s8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_43ibi"]
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_3odjt")
+
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("2_7evqg")
+
+[node name="Human Player" type="Node" parent="."]
+
+[node name="Board UI" type="Node" parent="."]
 
 [node name="board" type="Node2D" parent="."]
 position = Vector2(523, 56)
-script = ExtResource("2_n3cgk")
 
 [node name="boardBG" type="Sprite2D" parent="board"]
 position = Vector2(269, 270)
@@ -218,7 +222,6 @@ text = "tile 69345943"
 label_settings = SubResource("LabelSettings_43ibi")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="PlayerChanged" from="." to="board" method="UpdateTilesForCurrentPlayer"]
 [connection signal="TileSelected" from="board/tiles/tile_1" to="." method="OnTileSelected"]
 [connection signal="TileSelected" from="board/tiles/tile_2" to="." method="OnTileSelected"]
 [connection signal="TileSelected" from="board/tiles/tile_3" to="." method="OnTileSelected"]
